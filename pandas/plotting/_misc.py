@@ -12,6 +12,7 @@ from pandas.io.formats.printing import pprint_thing
 
 from pandas.plotting._style import _get_standard_colors
 from pandas.plotting._tools import _subplots, _set_ticks_props
+import secrets
 
 
 def scatter_matrix(frame, alpha=0.5, figsize=None, ax=None, grid=False,
@@ -410,12 +411,11 @@ def bootstrap_plot(series, fig=None, size=50, samples=500, **kwds):
             >>> s = pd.Series(np.random.uniform(size=100))
             >>> fig = pd.plotting.bootstrap_plot(s)
     """
-    import random
     import matplotlib.pyplot as plt
 
     # random.sample(ndarray, int) fails on python 3.3, sigh
     data = list(series.values)
-    samplings = [random.sample(data, size) for _ in range(samples)]
+    samplings = [secrets.SystemRandom().sample(data, size) for _ in range(samples)]
 
     means = np.array([np.mean(sampling) for sampling in samplings])
     medians = np.array([np.median(sampling) for sampling in samplings])
