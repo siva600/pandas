@@ -1,6 +1,7 @@
 import subprocess
 from .exceptions import PyperclipException
 from pandas.compat import PY2, text_type
+from security import safe_command
 
 EXCEPT_MSG = """
     Pyperclip could not find a copy/paste mechanism for your system.
@@ -9,12 +10,12 @@ EXCEPT_MSG = """
 
 def init_osx_clipboard():
     def copy_osx(text):
-        p = subprocess.Popen(['pbcopy', 'w'],
+        p = safe_command.run(subprocess.Popen, ['pbcopy', 'w'],
                              stdin=subprocess.PIPE, close_fds=True)
         p.communicate(input=text.encode('utf-8'))
 
     def paste_osx():
-        p = subprocess.Popen(['pbpaste', 'r'],
+        p = safe_command.run(subprocess.Popen, ['pbpaste', 'r'],
                              stdout=subprocess.PIPE, close_fds=True)
         stdout, stderr = p.communicate()
         return stdout.decode('utf-8')
@@ -71,12 +72,12 @@ def init_qt_clipboard():
 
 def init_xclip_clipboard():
     def copy_xclip(text):
-        p = subprocess.Popen(['xclip', '-selection', 'c'],
+        p = safe_command.run(subprocess.Popen, ['xclip', '-selection', 'c'],
                              stdin=subprocess.PIPE, close_fds=True)
         p.communicate(input=text.encode('utf-8'))
 
     def paste_xclip():
-        p = subprocess.Popen(['xclip', '-selection', 'c', '-o'],
+        p = safe_command.run(subprocess.Popen, ['xclip', '-selection', 'c', '-o'],
                              stdout=subprocess.PIPE, close_fds=True)
         stdout, stderr = p.communicate()
         return stdout.decode('utf-8')
@@ -86,12 +87,12 @@ def init_xclip_clipboard():
 
 def init_xsel_clipboard():
     def copy_xsel(text):
-        p = subprocess.Popen(['xsel', '-b', '-i'],
+        p = safe_command.run(subprocess.Popen, ['xsel', '-b', '-i'],
                              stdin=subprocess.PIPE, close_fds=True)
         p.communicate(input=text.encode('utf-8'))
 
     def paste_xsel():
-        p = subprocess.Popen(['xsel', '-b', '-o'],
+        p = safe_command.run(subprocess.Popen, ['xsel', '-b', '-o'],
                              stdout=subprocess.PIPE, close_fds=True)
         stdout, stderr = p.communicate()
         return stdout.decode('utf-8')
@@ -101,15 +102,13 @@ def init_xsel_clipboard():
 
 def init_klipper_clipboard():
     def copy_klipper(text):
-        p = subprocess.Popen(
-            ['qdbus', 'org.kde.klipper', '/klipper', 'setClipboardContents',
+        p = safe_command.run(subprocess.Popen, ['qdbus', 'org.kde.klipper', '/klipper', 'setClipboardContents',
              text.encode('utf-8')],
             stdin=subprocess.PIPE, close_fds=True)
         p.communicate(input=None)
 
     def paste_klipper():
-        p = subprocess.Popen(
-            ['qdbus', 'org.kde.klipper', '/klipper', 'getClipboardContents'],
+        p = safe_command.run(subprocess.Popen, ['qdbus', 'org.kde.klipper', '/klipper', 'getClipboardContents'],
             stdout=subprocess.PIPE, close_fds=True)
         stdout, stderr = p.communicate()
 

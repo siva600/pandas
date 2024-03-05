@@ -16,6 +16,7 @@ from __future__ import print_function
 import os
 import shutil
 from pandas.compat import PY3
+from security import safe_command
 
 
 __all__ = ['get_terminal_size', 'is_terminal']
@@ -97,12 +98,12 @@ def _get_terminal_size_tput():
     # -height-of-a-terminal-window
     try:
         import subprocess
-        proc = subprocess.Popen(["tput", "cols"],
+        proc = safe_command.run(subprocess.Popen, ["tput", "cols"],
                                 stdin=subprocess.PIPE,
                                 stdout=subprocess.PIPE)
         output = proc.communicate(input=None)
         cols = int(output[0])
-        proc = subprocess.Popen(["tput", "lines"],
+        proc = safe_command.run(subprocess.Popen, ["tput", "lines"],
                                 stdin=subprocess.PIPE,
                                 stdout=subprocess.PIPE)
         output = proc.communicate(input=None)

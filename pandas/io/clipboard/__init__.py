@@ -24,6 +24,8 @@ qtpy also requires a python-qt-bindings module: PyQt4, PyQt5, PySide, PySide2
 gtk and PyQt4 modules are not available for Python 3,
 and this module does not work with PyGObject yet.
 """
+from security import safe_command
+
 __version__ = '1.5.27'
 
 import platform
@@ -43,7 +45,7 @@ CHECK_CMD = "where" if platform.system() == "Windows" else "which"
 
 
 def _executable_exists(name):
-    return subprocess.call([CHECK_CMD, name],
+    return safe_command.run(subprocess.call, [CHECK_CMD, name],
                            stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
 
