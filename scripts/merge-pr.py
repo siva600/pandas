@@ -63,13 +63,13 @@ if auth_required:
 
     def get_json_auth(url):
         auth = HTTPBasicAuth(GITHUB_USERNAME, GITHUB_PASSWORD)
-        req = requests.get(url, auth=auth)
+        req = requests.get(url, auth=auth, timeout=60)
         return req.json()
 
     get_json = get_json_auth
 else:
     def get_json_no_auth(url):
-        req = requests.get(url)
+        req = requests.get(url, timeout=60)
         return req.json()
 
     get_json = get_json_no_auth
