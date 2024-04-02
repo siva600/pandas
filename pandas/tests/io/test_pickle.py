@@ -26,6 +26,7 @@ import pandas.util.testing as tm
 import pandas.util._test_decorators as td
 from pandas.tseries.offsets import Day, MonthEnd
 import shutil
+import fickling
 
 
 @pytest.fixture(scope='module')
@@ -233,7 +234,7 @@ def test_round_trip_current(current_pickle_data):
     def python_unpickler(path):
         with open(path, 'rb') as fh:
             fh.seek(0)
-            return python_pickle.load(fh)
+            return fickling.load(fh)
 
     data = current_pickle_data
     for typ, dv in data.items():
