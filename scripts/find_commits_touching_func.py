@@ -68,7 +68,7 @@ def clean_checkout(comm):
     if len(s) > 60:
         s = s[:60] + "..."
     s = s.split("\n")[0]
-    logger.info("CO: %s %s" % (comm, s))
+    logger.info("CO: %s %s", comm, s)
 
     sh.git('checkout', comm, _tty_out=False)
     sh.git('clean', '-f')
@@ -84,7 +84,7 @@ def get_hits(defname, files=()):
                        f,
                        _tty_out=False)
         except sh.ErrorReturnCode_128:
-            logger.debug("no matches in %s" % f)
+            logger.debug("no matches in %s", f)
             continue
 
         lines = r.strip().splitlines()[:-1]
@@ -125,7 +125,7 @@ def file_filter(state, dirname, fnames):
 
 def search(defname, head_commit="HEAD"):
     HEAD, s = get_commit_vitals("HEAD")[:2]
-    logger.info("HEAD at %s: %s" % (HEAD, s))
+    logger.info("HEAD at %s: %s", HEAD, s)
     done_commits = set()
     # allhits = set()
     files = []
@@ -148,9 +148,9 @@ def search(defname, head_commit="HEAD"):
             allhits.update(hits)
             done_commits.add(h)
 
-            logger.debug("Remaining: %s" % q)
+            logger.debug("Remaining: %s", q)
     finally:
-        logger.info("Restoring HEAD to %s" % HEAD)
+        logger.info("Restoring HEAD to %s", HEAD)
         clean_checkout(HEAD)
     return allhits
 
