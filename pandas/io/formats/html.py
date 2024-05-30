@@ -2,8 +2,6 @@
 """
 Module for formatting output data in HTML.
 """
-
-from __future__ import print_function
 from distutils.version import LooseVersion
 
 from textwrap import dedent

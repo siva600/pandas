@@ -3,8 +3,6 @@
 """
 Test output formatting for Series/DataFrame, including to_string & reprs
 """
-
-from __future__ import print_function
 import re
 
 import pytz

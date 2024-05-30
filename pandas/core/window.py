@@ -5,7 +5,6 @@ similar to how we have a Groupby object
 
 
 """
-from __future__ import division
 
 import warnings
 import numpy as np

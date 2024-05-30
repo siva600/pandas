@@ -1,5 +1,4 @@
 # pylint: disable=E1101
-from __future__ import division
 import operator
 import warnings
 from datetime import time, datetime, timedelta

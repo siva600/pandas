@@ -7,7 +7,6 @@ and returns the differences in plain text or GitHub task list format.
 Usage::
     $ ./find_undoc_args.py  (see arguments below)
 """
-from __future__ import print_function
 import sys
 from collections import namedtuple
 import types

@@ -1,4 +1,3 @@
-from __future__ import division
 # pylint: disable-msg=W0402
 
 import re

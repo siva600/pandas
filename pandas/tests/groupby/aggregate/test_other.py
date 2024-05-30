@@ -4,8 +4,6 @@
 test all other .agg behavior
 """
 
-from __future__ import print_function
-
 import pytest
 from collections import OrderedDict
 

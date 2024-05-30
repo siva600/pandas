@@ -3,8 +3,6 @@
 Module for formatting output data in Latex.
 """
 
-from __future__ import print_function
-
 from pandas.core.index import MultiIndex
 from pandas import compat
 from pandas.compat import range, map, zip, u

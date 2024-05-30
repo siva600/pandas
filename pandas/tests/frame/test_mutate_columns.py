@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
 import pytest
 from pandas.compat import range, lrange
 import numpy as np

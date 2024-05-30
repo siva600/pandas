@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
 from warnings import catch_warnings
 
 from datetime import datetime, date, timedelta, time

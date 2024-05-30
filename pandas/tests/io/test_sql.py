@@ -16,8 +16,6 @@ The SQL tests are broken down in different classes:
     - Tests for the fallback mode (`TestSQLiteFallback`)
 
 """
-
-from __future__ import print_function
 from warnings import catch_warnings
 import pytest
 import sqlite3

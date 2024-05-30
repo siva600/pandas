@@ -33,8 +33,6 @@ in the generate_legacy_storage_files.py to make it
 run under the older AND the newer version.
 
 """
-
-from __future__ import print_function
 from warnings import catch_warnings
 from distutils.version import LooseVersion
 from pandas import (Series, DataFrame, Panel,

@@ -3,8 +3,6 @@
 Collection of query wrappers / abstractions to both facilitate data
 retrieval and to reduce dependency on DB-specific API.
 """
-
-from __future__ import print_function, division
 from datetime import datetime, date, time
 
 import warnings
