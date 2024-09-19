@@ -26,7 +26,6 @@ from __future__ import print_function
 
 from subprocess import check_output
 from requests.auth import HTTPBasicAuth
-import requests
 
 import os
 import six
@@ -34,6 +33,7 @@ import sys
 import textwrap
 
 from six.moves import input
+from security import safe_requests
 
 PANDAS_HOME = '.'
 PROJECT_NAME = 'pandas'
@@ -63,13 +63,13 @@ if auth_required:
 
     def get_json_auth(url):
         auth = HTTPBasicAuth(GITHUB_USERNAME, GITHUB_PASSWORD)
-        req = requests.get(url, auth=auth)
+        req = safe_requests.get(url, auth=auth)
         return req.json()
 
     get_json = get_json_auth
 else:
     def get_json_no_auth(url):
-        req = requests.get(url)
+        req = safe_requests.get(url)
         return req.json()
 
     get_json = get_json_no_auth
