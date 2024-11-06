@@ -3,7 +3,6 @@
 from __future__ import print_function
 
 import pytest
-import random
 import numpy as np
 
 import pandas as pd
@@ -17,6 +16,7 @@ from pandas.util.testing import assert_series_equal, assert_frame_equal
 import pandas.util.testing as tm
 
 from pandas.tests.frame.common import TestData
+import secrets
 
 
 class TestDataFrameSorting(TestData):
@@ -357,8 +357,8 @@ class TestDataFrameSortIndexKinds(TestData):
     def test_sort_index_multicolumn(self):
         A = np.arange(5).repeat(20)
         B = np.tile(np.arange(5), 20)
-        random.shuffle(A)
-        random.shuffle(B)
+        secrets.SystemRandom().shuffle(A)
+        secrets.SystemRandom().shuffle(B)
         frame = DataFrame({'A': A, 'B': B,
                            'C': np.random.randn(100)})
 

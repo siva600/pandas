@@ -1,6 +1,5 @@
 import decimal
 import numbers
-import random
 import sys
 
 import numpy as np
@@ -9,6 +8,7 @@ import pandas as pd
 from pandas.core.arrays import ExtensionArray
 from pandas.core.dtypes.base import ExtensionDtype
 from pandas.core.dtypes.common import _ensure_platform_int
+import secrets
 
 
 class DecimalDtype(ExtensionDtype):
@@ -104,4 +104,4 @@ class DecimalArray(ExtensionArray):
 
 
 def make_data():
-    return [decimal.Decimal(random.random()) for _ in range(100)]
+    return [decimal.Decimal(secrets.SystemRandom().random()) for _ in range(100)]
