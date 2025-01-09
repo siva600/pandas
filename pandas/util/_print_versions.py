@@ -6,6 +6,7 @@ import subprocess
 import codecs
 import locale
 import importlib
+from security import safe_command
 
 
 def get_sys_info():
@@ -17,7 +18,7 @@ def get_sys_info():
     commit = None
     if os.path.isdir(".git") and os.path.isdir("pandas"):
         try:
-            pipe = subprocess.Popen('git log --format="%H" -n 1'.split(" "),
+            pipe = safe_command.run(subprocess.Popen, 'git log --format="%H" -n 1'.split(" "),
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
             so, serr = pipe.communicate()
