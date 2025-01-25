@@ -7,7 +7,7 @@ exclude = {'python=3'}
 rename = {'pytables': 'tables'}
 
 with open("ci/environment-dev.yaml") as f:
-    dev = yaml.load(f)
+    dev = yaml.load(f, Loader=yaml.SafeLoader)
 
 with open("ci/requirements-optional-conda.txt") as f:
     optional = [x.strip() for x in f.readlines()]
