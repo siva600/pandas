@@ -33,6 +33,7 @@ from pandas.util.testing import (assert_frame_equal, randbool,
                                  assert_numpy_array_equal, assert_series_equal,
                                  assert_produces_warning)
 from pandas.compat import PY3, reduce
+import secrets
 
 _series_frame_incompatible = _bool_ops_syms
 _scalar_skip = 'in', 'not in'
@@ -963,7 +964,6 @@ class TestAlignment(object):
 
     @pytest.mark.slow
     def test_complex_series_frame_alignment(self, engine, parser):
-        import random
         args = product(self.lhs_index_types, self.index_types,
                        self.index_types, self.index_types)
         n = 3
@@ -973,8 +973,8 @@ class TestAlignment(object):
         with warnings.catch_warnings(record=True):
             warnings.simplefilter('always', RuntimeWarning)
             for r1, r2, c1, c2 in args:
-                index_name = random.choice(['index', 'columns'])
-                obj_name = random.choice(['df', 'df2'])
+                index_name = secrets.choice(['index', 'columns'])
+                obj_name = secrets.choice(['df', 'df2'])
 
                 df = mkdf(m1, n, data_gen_f=f, r_idx_type=r1, c_idx_type=c1)
                 df2 = mkdf(m2, n, data_gen_f=f, r_idx_type=r2, c_idx_type=c2)

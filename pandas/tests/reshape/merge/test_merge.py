@@ -5,7 +5,6 @@ from datetime import datetime, date
 from numpy.random import randn
 from numpy import nan
 import numpy as np
-import random
 import re
 
 import pandas as pd
@@ -21,6 +20,7 @@ from pandas.core.dtypes.common import (
 from pandas import DataFrame, Index, MultiIndex, Series, Categorical
 import pandas.util.testing as tm
 from pandas.api.types import CategoricalDtype as CDT
+import secrets
 
 N = 50
 NGROUPS = 8
@@ -33,7 +33,7 @@ def get_test_data(ngroups=NGROUPS, n=N):
     if len(arr) < n:
         arr = np.asarray(list(arr) + unique_groups[:n - len(arr)])
 
-    random.shuffle(arr)
+    secrets.SystemRandom().shuffle(arr)
     return arr
 
 
