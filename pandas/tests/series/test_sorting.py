@@ -3,7 +3,6 @@
 import pytest
 
 import numpy as np
-import random
 
 from pandas import DataFrame, Series, MultiIndex, IntervalIndex, Categorical
 
@@ -11,6 +10,7 @@ from pandas.util.testing import assert_series_equal, assert_almost_equal
 import pandas.util.testing as tm
 
 from .common import TestData
+import secrets
 
 
 class TestSeriesSorting(TestData):
@@ -93,7 +93,7 @@ class TestSeriesSorting(TestData):
 
     def test_sort_index(self):
         rindex = list(self.ts.index)
-        random.shuffle(rindex)
+        secrets.SystemRandom().shuffle(rindex)
 
         random_order = self.ts.reindex(rindex)
         sorted_series = random_order.sort_index()
@@ -124,7 +124,7 @@ class TestSeriesSorting(TestData):
 
         # For #11402
         rindex = list(self.ts.index)
-        random.shuffle(rindex)
+        secrets.SystemRandom().shuffle(rindex)
 
         # descending
         random_order = self.ts.reindex(rindex)

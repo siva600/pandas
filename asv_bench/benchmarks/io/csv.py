@@ -1,4 +1,3 @@
-import random
 import timeit
 import string
 
@@ -9,6 +8,7 @@ from pandas.compat import PY2
 from pandas.compat import cStringIO as StringIO
 
 from ..pandas_vb_common import setup, BaseIO  # noqa
+import secrets
 
 
 class ToCSV(BaseIO):
@@ -159,7 +159,7 @@ class ReadCSVFloatPrecision(object):
     param_names = ['sep', 'decimal', 'float_precision']
 
     def setup(self, sep, decimal, float_precision):
-        floats = [''.join(random.choice(string.digits) for _ in range(28))
+        floats = [''.join(secrets.choice(string.digits) for _ in range(28))
                   for _ in range(15)]
         rows = sep.join(['0{}'.format(decimal) + '{}'] * 3) + '\n'
         data = rows * 5

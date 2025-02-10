@@ -26,6 +26,7 @@ from pandas.util.testing import (assert_panel_equal, assert_frame_equal,
 import pandas.core.panel as panelm
 import pandas.util.testing as tm
 import pandas.util._test_decorators as td
+import secrets
 
 
 def make_test_panel():
@@ -1543,14 +1544,13 @@ class TestPanel(PanelTests, CheckIndexing, SafeForLongAndSparse,
 
     def test_sort_index(self):
         with catch_warnings(record=True):
-            import random
 
             ritems = list(self.panel.items)
             rmajor = list(self.panel.major_axis)
             rminor = list(self.panel.minor_axis)
-            random.shuffle(ritems)
-            random.shuffle(rmajor)
-            random.shuffle(rminor)
+            secrets.SystemRandom().shuffle(ritems)
+            secrets.SystemRandom().shuffle(rmajor)
+            secrets.SystemRandom().shuffle(rminor)
 
             random_order = self.panel.reindex(items=ritems)
             sorted_panel = random_order.sort_index(axis=0)
