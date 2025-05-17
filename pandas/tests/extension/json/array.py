@@ -1,7 +1,6 @@
 import collections
 import itertools
 import numbers
-import random
 import string
 import sys
 
@@ -9,6 +8,7 @@ import numpy as np
 
 from pandas.core.dtypes.base import ExtensionDtype
 from pandas.core.arrays import ExtensionArray
+import secrets
 
 
 class JSONDtype(ExtensionDtype):
@@ -136,5 +136,5 @@ class JSONArray(ExtensionArray):
 def make_data():
     # TODO: Use a regular dict. See _NDFrameIndexer._setitem_with_indexer
     return [collections.UserDict([
-        (random.choice(string.ascii_letters), random.randint(0, 100))
-        for _ in range(random.randint(0, 10))]) for _ in range(100)]
+        (secrets.choice(string.ascii_letters), secrets.SystemRandom().randint(0, 100))
+        for _ in range(secrets.SystemRandom().randint(0, 10))]) for _ in range(100)]

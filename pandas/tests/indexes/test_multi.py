@@ -26,6 +26,7 @@ import pandas.util.testing as tm
 from pandas.util.testing import assert_almost_equal, assert_copy
 
 from .common import Base
+import secrets
 
 
 class TestMultiIndex(Base):
@@ -1953,10 +1954,9 @@ class TestMultiIndex(Base):
         tm.assert_numpy_array_equal(result, expected)
 
     def test_sortlevel(self):
-        import random
 
         tuples = list(self.index)
-        random.shuffle(tuples)
+        secrets.SystemRandom().shuffle(tuples)
 
         index = MultiIndex.from_tuples(tuples)
 

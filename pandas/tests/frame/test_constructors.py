@@ -25,6 +25,7 @@ import pandas.util.testing as tm
 from pandas.core.dtypes.cast import construct_1d_object_array_from_listlike
 
 from pandas.tests.frame.common import TestData
+import secrets
 
 
 MIXED_FLOAT_DTYPES = ['float16', 'float32', 'float64']
@@ -208,10 +209,9 @@ class TestDataFrameConstructors(TestData):
         assert result[0][0] == value
 
     def test_constructor_ordereddict(self):
-        import random
         nitems = 100
         nums = lrange(nitems)
-        random.shuffle(nums)
+        secrets.SystemRandom().shuffle(nums)
         expected = ['A%d' % i for i in nums]
         df = DataFrame(OrderedDict(zip(expected, [[0]] * nitems)))
         assert expected == list(df.columns)
