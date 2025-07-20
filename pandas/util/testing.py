@@ -47,6 +47,7 @@ from pandas import (bdate_range, CategoricalIndex, Categorical, IntervalIndex,
 
 from pandas._libs import testing as _testing
 from pandas.io.common import urlopen
+from security import safe_command
 
 
 N = 30
@@ -390,7 +391,7 @@ def check_output(*popenargs, **kwargs):
     """
     if 'stdout' in kwargs:
         raise ValueError('stdout argument not allowed, it will be overridden.')
-    process = subprocess.Popen(stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    process = safe_command.run(subprocess.Popen, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                *popenargs, **kwargs)
     output, unused_err = process.communicate()
     retcode = process.poll()
